@@ -25,6 +25,10 @@ jobs:
         run: |
           ls Kaam-Editing-portfolio-design  # Check the contents of the private repo
 
+      - name: Check current branch
+  run: echo "Current branch: ${{ github.ref }}"
+
+
       - name: Copy HTML file
         run: |
           cp Kaam-Editing-portfolio-design/index.html ./  # Copy the HTML file to the root of the public repo
