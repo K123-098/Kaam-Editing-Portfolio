@@ -19,7 +19,7 @@ jobs:
         with:
           repository: Kaam-Editing/Kaam-Editing-portfolio-design  # Replace with your private repo name
           token: ${{ secrets.GITHUB_TOKEN }}  # This allows access to your private repo
-          path: Kaam-Editing/Kaam-Editing-portfolio-design/blob/main/index.html  # Set the path where the private repo will be checked out
+          path: Kaam-Editing-portfolio-design/blob/main/index.html  # Set the path where the private repo will be checked out
 
       - name: List files in private repo (for debugging)
         run: |
