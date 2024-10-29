@@ -18,9 +18,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: main
-          repository: Kaam-Editing/Kaam-Editing-portfolio-design  # Your private repo
+          repository: Kaam-Editing / Kaam-Editing-portfolio-design  # Your private repo
           token: ${{ secrets.GITHUB_TOKEN }}  # This allows access to your private repo
-          path: https://github.com/Kaam-Editing/Kaam-Editing-portfolio-design  # Directory for checking out the private repo
+          path: Kaam-Editing-portfolio-design  # Directory for checking out the private repo
 
       - name: List files in private repo (for debugging)
         run: |
