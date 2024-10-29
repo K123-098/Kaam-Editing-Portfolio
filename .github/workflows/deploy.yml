@@ -19,6 +19,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}  # This allows access to your private repo
           path: index.html  # The folder where the private repo will be checked out
 
+      - name: List branches (for debugging)
+        run: |
+          git branch -a  # This will list all branches
+
+
       - name: Copy files
         run: |
           cp -r Kaam-Editing-portfolio-design/index.html .  # Adjust this path as needed
