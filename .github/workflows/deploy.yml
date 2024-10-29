@@ -1,9 +1,9 @@
+name: Build and Deploy
+
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:  # Allows you to manually trigger the workflow
- # This means it will run on pushes to the main branch
+      - main  # This means it will run on pushes to the main branch
 
 jobs:
   build:
@@ -17,17 +17,17 @@ jobs:
       - name: Checkout private repo
         uses: actions/checkout@v2
         with:
-          repository: Kaam-Editing/Kaam-Editing-portfolio-design  # Replace with your private repo name
+          repository: Kaam-Editing/Kaam-Editing-portfolio-design  # Your private repo
           token: ${{ secrets.GITHUB_TOKEN }}  # This allows access to your private repo
-          path: Kaam-Editing-portfolio-design/blob/main/index.html  # Set the path where the private repo will be checked out
+          path: Kaam-Editing-portfolio-design  # Directory for checking out the private repo
 
       - name: List files in private repo (for debugging)
         run: |
-          ls private-repo  # List files to confirm checkout
+          ls Kaam-Editing-portfolio-design  # Check the contents of the private repo
 
       - name: Copy HTML file
         run: |
-          cp private-repo/index.html ./  # Copy the HTML file to the root of the public repo
+          cp Kaam-Editing-portfolio-design/index.html ./  # Copy the HTML file to the root of the public repo
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
