@@ -1,4 +1,4 @@
 - 👋 Hi, I’m @Kaam-Editing
 - 👀 I’m interested in Video Editing
-- 💞️ I’m looking to collaborate with all youtubers and instagram users to gain them views
+- 💞️ I’m looking to collaborate with all youtubers and instagram users to gain them their potential leads
 - 📫 How to reach me = Instagram: https://www.instagram.com/kaam.edits/
