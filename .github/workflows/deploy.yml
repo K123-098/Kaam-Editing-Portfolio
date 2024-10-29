@@ -1,9 +1,9 @@
-name: Build and Deploy
-
 on:
   push:
     branches:
-      - main  # This means it will run on pushes to the main branch
+      - main
+  workflow_dispatch:  # Allows you to manually trigger the workflow
+ # This means it will run on pushes to the main branch
 
 jobs:
   build:
