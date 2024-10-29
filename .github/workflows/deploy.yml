@@ -21,7 +21,7 @@ jobs:
 
       - name: Copy files
         run: |
-          cp -r Kaam-Editing/Kaam-Editing-portfolio-design/blob/main/index.html .  # Adjust this path as needed
+          cp -r Kaam-Editing-portfolio-design/main/index.html .  # Adjust this path as needed
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
