@@ -17,21 +17,20 @@ jobs:
       - name: Checkout private repo
         uses: actions/checkout@v2
         with:
-          repository: Kaam-Editing / Kaam-Editing-portfolio-design  # Replace with your private repo name
+          repository: Kaam-Editing/Kaam-Editing-portfolio-design  # Replace with your private repo name
           token: ${{ secrets.GITHUB_TOKEN }}  # This allows access to your private repo
-          path: index.html  # The folder where the private repo will be checked out
+          path: private-repo  # Set the path where the private repo will be checked out
 
-      - name: List branches (for debugging)
+      - name: List files in private repo (for debugging)
         run: |
-          git branch -a  # This will list all branches
+          ls private-repo  # List files to confirm checkout
 
-
-      - name: Copy files
+      - name: Copy HTML file
         run: |
-          cp -r Kaam-Editing-portfolio-design/index.html .  # Adjust this path as needed
+          cp private-repo/index.html ./  # Copy the HTML file to the root of the public repo
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./  # Adjust this if your files are in a different folder
+          publish_dir: ./  # This assumes your HTML file is now in the root
