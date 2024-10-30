@@ -8,7 +8,7 @@
 <body>
     <div id="content"></div>
     <script>
-        fetch('https://github.com/Kaam-Editing/Kaam-Editing-portfolio-design/tree/main/api/content') // Adjust the URL to point to your private repo API
+        fetch('https://github.com/Kaam-Editing/Kaam-Editing-portfolio-design/tree/main/server.js/api/content') // Adjust the URL to point to your private repo API
             .then(response => response.text())
             .then(html => {
                 document.getElementById('content').innerHTML = html;
