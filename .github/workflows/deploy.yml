@@ -1,0 +1,34 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Change if your main branch is named differently
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout private repo
+      uses: actions/checkout@v2
+      with:
+        repository: Kaam-Editing/Kaam-Editing-portfolio-design  # Your private repo
+        token: ${{ secrets.PERSONAL_TOKEN }}
+
+    - name: Copy HTML file to temporary location
+      run: |
+        cp index.html /tmp/  # Adjust filename if necessary
+
+    - name: Checkout public repo
+      uses: actions/checkout@v2
+      with:
+        repository: Kaam-Editing/Kaam-Editing-Portfolio  # Your public repo
+        token: ${{ secrets.PERSONAL_TOKEN }}
+        path: public-repo
+
+    - name: Copy HTML file to public repo
+      run: |
+        cp /tmp/index.html public-repo/  # Adjust filename if necessary
+
+    
