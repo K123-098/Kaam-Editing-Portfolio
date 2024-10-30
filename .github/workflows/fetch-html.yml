@@ -17,11 +17,11 @@ jobs:
 
       - name: Fetch HTML from Private Repo
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
         run: |
           REPO="Kaam-Editing/Kaam-Editing-portfolio-design" # Your private repo
           FILE_PATH="index.html"
-          RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" \
+          RESPONSE=$(curl -H "Authorization: token $PERSONAL_TOKEN" \
                   "https://api.github.com/repos/$REPO/contents/$FILE_PATH")
           CONTENT=$(echo $RESPONSE | jq -r .content | base64 --decode)
           echo "$CONTENT" > fetched-content.html
@@ -37,6 +37,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
           publish_dir: ./ # Change this if your HTML file is in a subdirectory
 
