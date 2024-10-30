@@ -21,7 +21,7 @@ jobs:
 
       - name: Copy HTML file
         run: |
-          cp Kaam-Editing-portfolio-design/index.html ../  # Copy the HTML file to the root of the public repo
+          cp Kaam-Editing-portfolio-design/index.html public/  # Copy the HTML file to the root of the public repo
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
