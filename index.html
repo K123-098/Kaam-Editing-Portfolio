@@ -9,7 +9,7 @@
     <h1>My Portfolio</h1>
     <div id="portfolio-content"></div>
     <script>
-        fetch('fetched-content.html')
+        fetch('fetch-html.yml')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('portfolio-content').innerHTML = data;
