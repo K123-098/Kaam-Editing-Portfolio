@@ -1,0 +1,37 @@
+name: Fetch HTML from Private Repo
+
+on:
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  fetch-html:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout public repository
+        uses: actions/checkout@v2
+
+      - name: Fetch HTML from Private Repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically provided by GitHub
+        run: |
+          REPO="Kaam-Editing/Kaam-Editing-portfolio-design" # Your private repo
+          FILE_PATH="index.html" # Path to the HTML file in the private repo
+          
+          # Fetch the HTML file from the private repository
+          RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" \
+                  "https://api.github.com/repos/$REPO/contents/$FILE_PATH")
+          
+          # Decode and save the content
+          CONTENT=$(echo $RESPONSE | jq -r .content | base64 --decode)
+          
+          # Save the content to an HTML file in the public repo
+          echo "$CONTENT" > fetched-content.html
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "anytingac1@example.com"
+          git config --local user.name "Kaam-Editing"
+          git add fetched-content.html
+          git commit -m "Add fetched HTML content"
+          git push
