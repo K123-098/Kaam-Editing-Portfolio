@@ -1,30 +1,35 @@
-name: Build and Deploy
+name: Deploy HTML from Private Repo
 
 on:
   push:
     branches:
-      - main  # This means it will run on pushes to the main branch
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout public repo
         uses: actions/checkout@v2
-        with:
-          ref: main  # Explicitly specify the branch name
 
       - name: Checkout private repo
         uses: actions/checkout@v2
         with:
-          ref: main
+          repository: Kaam-Editing/Kaam-Editing-portfolio-design
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: Kaam-Editing-portfolio-design
 
       - name: Copy HTML file
         run: |
-          cp index.html public/  # Copy the HTML file to the root of the public repo
+          # Copy the HTML file to the public directory
+          cp Kaam-Editing-portfolio-design/index.html public/
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          publish_dir: ./  # This assumes your HTML file is now in the root
+      - name: Deploy to GitHub Pages (or another hosting service)
+        run: |
+          echo "Deploying to GitHub Pages..."
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add public/index.html
+          git commit -m "Deploy HTML from private repo"
+          git push origin gh-pages  # Push to a `gh-pages` branch
