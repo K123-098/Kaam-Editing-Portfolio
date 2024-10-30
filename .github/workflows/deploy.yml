@@ -12,24 +12,31 @@ jobs:
     steps:
       - name: Checkout public repo
         uses: actions/checkout@v2
+        with:
+          repository: your-username/Kaam-Editing-Portfolio  # Your public repo
+          token: ${{ secrets.GITHUB_TOKEN }}  # Token for the public repo
 
       - name: Checkout private repo
         uses: actions/checkout@v2
         with:
-          repository: Kaam-Editing/Kaam-Editing-portfolio-design
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          path: Kaam-Editing-portfolio-design
+          repository: your-username/Kaam-Editing-portfolio-design  # Your private repo
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Token for the private repo
+
+      - name: List files in private repo (for debugging)
+        run: ls Kaam-Editing-portfolio-design/
 
       - name: Copy HTML file
         run: |
-          # Copy the HTML file to the public directory
-          cp Kaam-Editing-portfolio-design/index.html public/
+          cp Kaam-Editing-portfolio-design/index.html Kaam-Editing-Portfolio/
 
-      - name: Deploy to GitHub Pages (or another hosting service)
+      - name: Set up Git
         run: |
-          echo "Deploying to GitHub Pages..."
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add public/index.html
-          git commit -m "Deploy HTML from private repo"
-          git push origin gh-pages  # Push to a `gh-pages` branch
+
+      - name: Commit and push changes to public repo
+        run: |
+          cd Kaam-Editing-Portfolio  # Change to the public repo directory
+          git add index.html
+          git commit -m "Deploy index.html from private repo" || echo "No changes to commit"
+          git push origin main  # Push to the main branch of the public repo
