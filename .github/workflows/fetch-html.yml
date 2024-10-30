@@ -1,7 +1,8 @@
-name: Fetch HTML from Private Repo
+name: Fetch HTML and Deploy
 
 on:
   workflow_dispatch: # Allows manual triggering
+  push: # Automatically run on pushes to main
 
 permissions:
   contents: write # Allows GitHub Actions to push changes
@@ -16,19 +17,13 @@ jobs:
 
       - name: Fetch HTML from Private Repo
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically provided by GitHub
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           REPO="Kaam-Editing/Kaam-Editing-portfolio-design" # Your private repo
-          FILE_PATH="index.html" # Path to the HTML file in the private repo
-          
-          # Fetch the HTML file from the private repository
+          FILE_PATH="index.html"
           RESPONSE=$(curl -H "Authorization: token $GITHUB_TOKEN" \
                   "https://api.github.com/repos/$REPO/contents/$FILE_PATH")
-          
-          # Decode and save the content
           CONTENT=$(echo $RESPONSE | jq -r .content | base64 --decode)
-          
-          # Save the content to an HTML file in the public repo
           echo "$CONTENT" > fetched-content.html
 
       - name: Commit and push changes
@@ -36,5 +31,12 @@ jobs:
           git config --local user.email "anytingac1@example.com"
           git config --local user.name "Kaam-Editing"
           git add fetched-content.html
-          git commit -m "Add fetched HTML content"
+          git commit -m "Add fetched HTML content" || echo "No changes to commit"
           git push
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ # Change this if your HTML file is in a subdirectory
+
