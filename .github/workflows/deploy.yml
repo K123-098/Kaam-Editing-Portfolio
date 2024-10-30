@@ -21,7 +21,7 @@ jobs:
 
       - name: List files in private repo (for debugging)
         run: |
-          ls Kaam-Editing-portfolio-design  # Check the contents of the private repo
+          ls https://github.com/Kaam-Editing/Kaam-Editing-portfolio-design  # Check the contents of the private repo
 
       - name: Copy HTML file
         run: |
