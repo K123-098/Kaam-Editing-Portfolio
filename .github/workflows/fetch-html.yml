@@ -3,6 +3,9 @@ name: Fetch HTML from Private Repo
 on:
   workflow_dispatch: # Allows manual triggering
 
+permissions:
+  contents: write # Allows GitHub Actions to push changes
+
 jobs:
   fetch-html:
     runs-on: ubuntu-latest
