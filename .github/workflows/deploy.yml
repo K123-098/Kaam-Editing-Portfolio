@@ -13,7 +13,7 @@ jobs:
       - name: Checkout public repo
         uses: actions/checkout@v2
         with:
-          repository: your-username/Kaam-Editing-Portfolio  # Your public repo
+          repository: Kaam-Editing/Kaam-Editing-Portfolio  # Your public repo
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # Token for the public repo
 
       - name: Checkout private repo
