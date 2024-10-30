@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaam Editing Portfolio</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            background: linear-gradient(to right, #e0bbf1, #6a0dad);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2em;
+        }
+
+        .video-container {
+            position: relative;
+            width: 290px;
+            height: 375px; /* Increased height for controls */
+            background-color: black;
+            overflow: hidden;
+            margin: 10px;
+            padding-bottom: 55px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-wrapper {
+            display: flex;
+        }
+
+        .iframe-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            z-index: 1;
+        }
+
+        .play-pause-button, .settings-button, .fullscreen-button {
+            font-size: 29px;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 2;
+            background: none;
+            border: none;
+            margin-right: 10px;
+            margin-bottom: 7px;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px; /* Add this line for spacing */
+            display: flex;
+            align-items: center;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.7); /* Optional: Add a semi-transparent background */
+            padding: 0px; /* Add padding for extra space */
+            border-radius: 5px; /* Optional: Round the corners */
+        }
+
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 10px;
+            flex-grow: 1;
+        }
+
+        .timeline {
+            cursor: pointer;
+            height: 5px;
+            background-color: #444;
+            flex-grow: 1;
+            margin-top: 5px;
+        }
+
+        .time-display {
+            color: white;
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+
+        .settings-menu {
+            display: none;
+            position: absolute;
+            background: black;
+            border: 1px solid #555;
+            z-index: 3;
+            padding: 10px;
+            right: 20px;
+            top: 50px;
+        }
+
+        .settings-button:hover + .settings-menu,
+        .settings-menu:hover {
+            display: block;
+        }
+
+        .quality-option {
+            color: white;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+
+        .quality-option:hover {
+            text-decoration: underline;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+            font-size: 14px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Short Form Content</h1>
+    <h2>1. Talking Head Edits</h2>
+
+    <div class="video-wrapper">
+        <div class="video-container" id="video-container-1">
+            <iframe id="youtube-video-1" src="https://www.youtube-nocookie.com/embed/sKNQRgQTM50?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="iframe-overlay" onclick="toggleVideo(1)"></div>
+
+            <div class="video-controls">
+                <div class="play-pause-button" id="play-pause-button-1" onmouseover="showTooltip(event, 'Play')" onmouseout="hideTooltip()" onclick="toggleVideo(1)">▶️</div>
+                <div class="timeline-container">
+                    <input type="range" class="timeline" id="timeline-1" value="0" min="0" step="1" onchange="seekVideo(1)">
+                    <div class="time-display" id="time-display-1">0:00 / 0:00</div>
+                </div>
+                <div class="settings-button" onclick="toggleSettings(1)" onmouseover="showTooltip(event, 'Settings')" onmouseout="hideTooltip()">⚙️</div>
+                <div class="fullscreen-button" onclick="toggleFullscreen(1)" onmouseover="showTooltip(event, 'Fullscreen')" onmouseout="hideTooltip()">[ ]</div>
+            </div>
+            <div class="settings-menu" id="settings-menu-1">
+                <div class="quality-option" onclick="changeQuality(1, '1080p')">1080p</div>
+                <div class="quality-option" onclick="changeQuality(1, '720p')">720p</div>
+                <div class="quality-option" onclick="changeQuality(1, '480p')">480p</div>
+                <div class="quality-option" onclick="changeQuality(1, '360p')">360p</div>
+                <div class="quality-option" onclick="changeQuality(1, '240p')">240p</div>
+            </div>
+        </div>
+
+        <div class="video-container" id="video-container-2">
+            <iframe id="youtube-video-2" src="https://www.youtube.com/embed/PeZ8abW8GtA?si=nxO5sVv-fNyrPEws&enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="iframe-overlay" onclick="toggleVideo(2)"></div>
+
+            <div class="video-controls">
+                <div class="play-pause-button" id="play-pause-button-2" onmouseover="showTooltip(event, 'Play')" onmouseout="hideTooltip()" onclick="toggleVideo(2)">▶️</div>
+                <div class="timeline-container">
+                    <input type="range" class="timeline" id="timeline-2" value="0" min="0" step="1" onchange="seekVideo(2)">
+                    <div class="time-display" id="time-display-2">0:00 / 0:00</div>
+                </div>
+                <div class="settings-button" onclick="toggleSettings(2)" onmouseover="showTooltip(event, 'Settings')" onmouseout="hideTooltip()">⚙️</div>
+                <div class="fullscreen-button" onclick="toggleFullscreen(2)" onmouseover="showTooltip(event, 'Fullscreen')" onmouseout="hideTooltip()">[ ]</div>
+            </div>
+            <div class="settings-menu" id="settings-menu-2">
+                <div class="quality-option" onclick="changeQuality(2, '1080p')">1080p</div>
+                <div class="quality-option" onclick="changeQuality(2, '720p')">720p</div>
+                <div class="quality-option" onclick="changeQuality(2, '480p')">480p</div>
+                <div class="quality-option" onclick="changeQuality(2, '360p')">360p</div>
+                <div class="quality-option" onclick="changeQuality(2, '240p')">240p</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        let players = [];
+        let isFullscreen = false;
+
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            players[1] = new YT.Player('youtube-video-1', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': (event) => updateTimeline(1),
+                }
+            });
+
+            players[2] = new YT.Player('youtube-video-2', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': (event) => updateTimeline(2),
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Additional setup after the player is ready
+        }
+
+        function toggleVideo(videoNumber) {
+            const player = players[videoNumber];
+            const playPauseButton = document.getElementById(`play-pause-button-${videoNumber}`);
+            if (player) {
+                const state = player.getPlayerState();
+                if (state === YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                    playPauseButton.innerHTML = '▶️'; // Change to play icon
+                } else {
+                    player.playVideo();
+                    playPauseButton.innerHTML = '⏸️'; // Change to pause icon
+                }
+            }
+        }
+
+        function updateTimeline(videoNumber) {
+            const player = players[videoNumber];
+            const timeline = document.getElementById(`timeline-${videoNumber}`);
+            const timeDisplay = document.getElementById(`time-display-${videoNumber}`);
+            if (player) {
+                const duration = player.getDuration();
+                const currentTime = player.getCurrentTime();
+                timeline.max = duration;
+                timeline.value = currentTime;
+                timeDisplay.innerText = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+            }
+        }
+
+        function seekVideo(videoNumber) {
+            const player = players[videoNumber];
+            const timeline = document.getElementById(`timeline-${videoNumber}`);
+            if (player) {
+                player.seekTo(timeline.value, true);
+            }
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        function toggleFullscreen(videoNumber) {
+            const videoContainer = document.getElementById(`video-container-${videoNumber}`);
+            
+            if (!isFullscreen) {
+                if (videoContainer.requestFullscreen) {
+                    videoContainer.requestFullscreen();
+                } else if (videoContainer.mozRequestFullScreen) { // Firefox
+                    videoContainer.mozRequestFullScreen();
+                } else if (videoContainer.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                    videoContainer.webkitRequestFullscreen();
+                } else if (videoContainer.msRequestFullscreen) { // IE/Edge
+                    videoContainer.msRequestFullscreen();
+                }
+                isFullscreen = true;
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { // Firefox
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { // Chrome, Safari, and Opera
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { // IE/Edge
+                    videoContainer.msRequestFullscreen();
+                }
+                isFullscreen = false;
+            }
+        }
+
+        function toggleSettings(videoNumber) {
+            const settingsMenu = document.getElementById(`settings-menu-${videoNumber}`);
+            settingsMenu.style.display = settingsMenu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function changeQuality(videoNumber, quality) {
+            alert(`Quality changed to ${quality} for video ${videoNumber}`);
+        }
+
+        function showTooltip(event, text) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerText = text;
+            tooltip.style.display = 'block';
+            tooltip.style.top = `${event.clientY + 10}px`;
+            tooltip.style.left = `${event.clientX + 10}px`;
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'none';
+        }
+
+        setInterval(() => {
+            updateTimeline(1);
+            updateTimeline(2);
+        }, 1000);
+    </script>
+
+</body>
+</html>
