@@ -7,7 +7,7 @@
 </head>
 <body>
    <script>
-    const encodedCode = '${ENCODED_CONTENT}';
+    const encodedCode = {ENCODED_CONTENT};
     const decodedCode = decodeURIComponent(escape(atob(encodedCode)));
     document.write(decodedCode);
 </script>
