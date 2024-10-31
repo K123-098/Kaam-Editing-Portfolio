@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Decoded Content</title>
+</head>
+<body>
+    <script type='text/plain' id='encoded-content'>
+        
+    </script>
+    <script>
+        // Retrieve the encoded content from the hidden script tag
+        const encodedCode = document.getElementById('encoded-content').innerHTML;
+
+        // Decode the content
+        const decodedCode = decodeURIComponent(escape(atob(encodedCode)));
+
+        // Display the decoded content on the webpage
+        document.write(decodedCode);
+    </script>
+</body>
+</html>
