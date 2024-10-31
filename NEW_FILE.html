@@ -6,10 +6,11 @@
     <title>Decoded Content</title>
 </head>
 <body>
-    <script>
-        const encodedCode = 'PCFET0NUWVBFIGh0bWw+DQo8aHRtbCBsYW5nPSJlbiI+DQo8aGVhZD4NCiAgICA8bWV0YSBjaGFy';
-        const decodedCode = decodeURIComponent(escape(atob(encodedCode)));
-        document.write(decodedCode);
-    </script>
+   <script>
+    const encodedCode = '${ENCODED_CONTENT}';
+    const decodedCode = decodeURIComponent(escape(atob(encodedCode)));
+    document.write(decodedCode);
+</script>
+
 </body>
 </html>
