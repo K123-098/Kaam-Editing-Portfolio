@@ -47,13 +47,16 @@
             console.log(element);
         }, 1000);
 
-  fetch('encoded_content.txt')
-      .then(response => response.text())
-      .then(encodedContent => {
-          const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
-          document.write(decodedCode);
-      });
-
+        // Fetch encoded content using AJAX
+        fetch('../Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt')
+            .then(response => response.text())
+            .then(encodedContent => {
+                const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
+                document.write(decodedCode);
+            })
+            .catch(error => {
+                console.error('Error fetching encoded content:', error);
+            });
     </script>
 </head>
 <body>
