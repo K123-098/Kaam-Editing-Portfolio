@@ -48,15 +48,25 @@
         }, 1000);
 
         // Fetch encoded content using AJAX
-        fetch('https://raw.githubusercontent.com/Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt')
-            .then(response => response.text())
-            .then(encodedContent => {
-                const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
-                document.write(decodedCode);
-            })
-            .catch(error => {
-                console.error('Error fetching encoded content:', error);
-            });
+        fetch('https://raw.githubusercontent.com/Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'token PUBLIC_REPO_TOKEN' // Replace with your PAT
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.text();
+        })
+        .then(encodedContent => {
+            const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
+            document.write(decodedCode);
+        })
+        .catch(error => {
+            console.error('Error fetching encoded content:', error);
+        });
     </script>
 </head>
 <body>
