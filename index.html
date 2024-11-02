@@ -48,7 +48,7 @@
         }, 1000);
 
         // Fetch encoded content using AJAX
-        fetch('../Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt')
+        fetch('encoded_content.txt')
             .then(response => response.text())
             .then(encodedContent => {
                 const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
