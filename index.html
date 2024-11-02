@@ -32,6 +32,21 @@
             }
         });
 
+        // Detect and warn if the console is opened
+        let devtoolsOpen = false;
+        const element = new Image();
+        Object.defineProperty(element, 'id', {
+            get: function() {
+                devtoolsOpen = true;
+                alert('Please do not use developer tools!');
+            }
+        });
+
+        setInterval(function() {
+            devtoolsOpen = false;
+            console.log(element);
+        }, 1000);
+
         // Fetch encoded content using AJAX
         fetch('https://raw.githubusercontent.com/Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt')
             .then(response => response.text())
