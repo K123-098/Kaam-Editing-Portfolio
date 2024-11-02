@@ -1,4 +1,1 @@
-- 👋 Hi, I’m @Kaam-Editing
-- 👀 I’m a video editor with 3 years of experience in using Adobe softwares and various others softwares.
-- 💞️ I’m looking to collaborate with all youtubers and instagram users to gain them their potential leads
-- 📫 How to reach me = Instagram: https://www.instagram.com/kaam.edits/
+👋 Hi
