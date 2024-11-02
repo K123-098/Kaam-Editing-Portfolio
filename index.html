@@ -9,7 +9,7 @@
             event.preventDefault(); 
         });
 
-        // Prevent opening developer tools with Ctrl+Shift+I (F12)
+        // Prevent opening developer tools with certain keys
         document.addEventListener('keydown', function(event) { 
             if (event.ctrlKey && (event.key === 'i' || event.keyCode === 73) || 
                 (event.shiftKey && event.keyCode === 73) || 
@@ -48,18 +48,23 @@
         }, 1000);
 
         // Fetch encoded content using AJAX
-        fetch('encoded_content.txt')
-            .then(response => response.text())
-            .then(encodedContent => {
+        async function fetchAndDecode() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const encodedContent = await response.text();
                 const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
-                document.write(decodedCode);
-            })
-            .catch(error => {
+                document.body.innerHTML = decodedCode;  // Display the decoded content
+            } catch (error) {
                 console.error('Error fetching encoded content:', error);
-            });
+            }
+        }
+
+        // Call the function to fetch and decode
+        fetchAndDecode();
     </script>
 </head>
 <body>
-    
+    <h1>Content will be loaded here...</h1>
 </body>
 </html>
