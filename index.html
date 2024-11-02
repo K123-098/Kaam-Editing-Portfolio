@@ -3,6 +3,7 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Secure Content</title>
     <script>
         // Prevent right-click context menu
         document.addEventListener('contextmenu', function(event) { 
@@ -47,292 +48,214 @@
             console.log(element);
         }, 1000);
 
-        document.write(`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaam Editing Portfolio</title>
-    <style>
-        html {
-            font-size: 16px; /* Set base font size */
+        // Function to inject decoded content
+        function loadContent() {
+            const content = atob('PCFET0NUWVBFIGh0bWw+DQo8aHRtbCBsYW5nPSJlbiI+DQo8aGVhZD4NCiAgICA8bWV0YSBjaGFy
+c2V0PSJVVEYtOCI+DQogICAgPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRl
+dmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPg0KICAgIDx0aXRsZT5LYWFtIEVkaXRpbmcg
+UG9ydGZvbGlvPC90aXRsZT4NCiAgICA8c3R5bGU+DQogICAgICAgIGh0bWwgew0KICAgICAgICAg
+ICAgZm9udC1zaXplOiAxNnB4OyAvKiBTZXQgYmFzZSBmb250IHNpemUgKi8NCiAgICAgICAgfQ0K
+DQogICAgICAgIGJvZHkgew0KICAgICAgICAgICAgZGlzcGxheTogZmxleDsNCiAgICAgICAgICAg
+IGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47DQogICAgICAgICAgICBhbGlnbi1pdGVtczogY2VudGVy
+Ow0KICAgICAgICAgICAgbWFyZ2luOiAxLjI1cmVtOyAvKiAyMHB4ICovDQogICAgICAgICAgICBi
+YWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQodG8gcmlnaHQsICNlMGJiZjEsICM2YTBkYWQpOw0K
+ICAgICAgICAgICAgY29sb3I6IHdoaXRlOw0KICAgICAgICAgICAgZm9udC1mYW1pbHk6IEFyaWFs
+LCBzYW5zLXNlcmlmOw0KICAgICAgICB9DQoNCiAgICAgICAgaDEgew0KICAgICAgICAgICAgbWFy
+Z2luOiAxLjI1cmVtIDA7IC8qIDIwcHggKi8NCiAgICAgICAgICAgIGZvbnQtc2l6ZTogMnJlbTsg
+LyogMzJweCAqLw0KICAgICAgICB9DQoNCiAgICAgICAgaDIgew0KICAgICAgICAgICAgbWFyZ2lu
+OiAwLjYyNXJlbSAwOyAvKiAxMHB4ICovDQogICAgICAgICAgICBmb250LXNpemU6IDEuNXJlbTsg
+LyogMjRweCAqLw0KICAgICAgICB9DQoNCiAgICAgICAgLnZpZGVvLXdyYXBwZXIgew0KICAgICAg
+ICAgICAgZGlzcGxheTogZmxleDsNCiAgICAgICAgICAgIGdhcDogMS44NzVyZW07IC8qIFNwYWNl
+IGJldHdlZW4gdmlkZW8gY29udGFpbmVycyAqLw0KICAgICAgICAgICAgZmxleC13cmFwOiB3cmFw
+OyAvKiBBbGxvdyB3cmFwcGluZyBvbiBzbWFsbGVyIHNjcmVlbnMgKi8NCiAgICAgICAgfQ0KDQog
+ICAgICAgIC52aWRlby1jb250YWluZXIgew0KICAgICAgICAgICAgcG9zaXRpb246IHJlbGF0aXZl
+Ow0KICAgICAgICAgICAgd2lkdGg6IDI1cmVtOyAvKiBJbmNyZWFzZWQgd2lkdGggKi8NCiAgICAg
+ICAgICAgIGhlaWdodDogMzByZW07IC8qIEluY3JlYXNlZCBoZWlnaHQgKi8NCiAgICAgICAgICAg
+IGJhY2tncm91bmQtY29sb3I6IGJsYWNrOw0KICAgICAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjsN
+CiAgICAgICAgICAgIHBhZGRpbmctYm90dG9tOiAzLjQzNzVyZW07IC8qIDU1cHggKi8NCiAgICAg
+ICAgfQ0KDQogICAgICAgIC52aWRlby1jb250YWluZXIgaWZyYW1lIHsNCiAgICAgICAgICAgIHdp
+ZHRoOiAxMDAlOw0KICAgICAgICAgICAgaGVpZ2h0OiAxMDAlOw0KICAgICAgICB9DQoNCiAgICAg
+ICAgLmlmcmFtZS1vdmVybGF5IHsNCiAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsNCiAg
+ICAgICAgICAgIHRvcDogMDsNCiAgICAgICAgICAgIGxlZnQ6IDA7DQogICAgICAgICAgICB3aWR0
+aDogMTAwJTsNCiAgICAgICAgICAgIGhlaWdodDogMTAwJTsNCiAgICAgICAgICAgIGJhY2tncm91
+bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMCk7DQogICAgICAgICAgICB6LWluZGV4OiAxOw0KICAg
+ICAgICB9DQoNCiAgICAgICAgLnZpZGVvLWNvbnRyb2xzIHsNCiAgICAgICAgICAgIHBvc2l0aW9u
+OiBhYnNvbHV0ZTsNCiAgICAgICAgICAgIGJvdHRvbTogMDsNCiAgICAgICAgICAgIGxlZnQ6IDA7
+DQogICAgICAgICAgICByaWdodDogMDsNCiAgICAgICAgICAgIGRpc3BsYXk6IGZsZXg7DQogICAg
+ICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyOw0KICAgICAgICAgICAgei1pbmRleDogMjsNCiAg
+ICAgICAgICAgIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC43KTsNCiAgICAgICAgICAgIHBh
+ZGRpbmc6IDAuNjI1cmVtOyAvKiBTcGFjZSBpbnNpZGUgY29udHJvbHMgKi8NCiAgICAgICAgICAg
+IGJvcmRlci1yYWRpdXM6IDAuMzEyNXJlbTsgLyogNXB4ICovDQogICAgICAgIH0NCg0KICAgICAg
+ICAucGxheS1wYXVzZS1idXR0b24sIC5zZXR0aW5ncy1idXR0b24sIC5mdWxsc2NyZWVuLWJ1dHRv
+biB7DQogICAgICAgICAgICBmb250LXNpemU6IDEuODEyNXJlbTsgLyogMjlweCAqLw0KICAgICAg
+ICAgICAgY29sb3I6IHdoaXRlOw0KICAgICAgICAgICAgY3Vyc29yOiBwb2ludGVyOw0KICAgICAg
+ICAgICAgdHJhbnNpdGlvbjogY29sb3IgMC4zczsNCiAgICAgICAgICAgIHotaW5kZXg6IDI7DQog
+ICAgICAgICAgICBiYWNrZ3JvdW5kOiBub25lOw0KICAgICAgICAgICAgYm9yZGVyOiBub25lOw0K
+ICAgICAgICAgICAgbWFyZ2luLXJpZ2h0OiAwLjYyNXJlbTsgLyogMTBweCAqLw0KICAgICAgICB9
+DQoNCiAgICAgICAgLnRpbWVsaW5lLWNvbnRhaW5lciB7DQogICAgICAgICAgICBkaXNwbGF5OiBm
+bGV4Ow0KICAgICAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsNCiAgICAgICAgICAgIGZs
+ZXgtZ3JvdzogMTsNCiAgICAgICAgICAgIG1hcmdpbi1sZWZ0OiAwLjYyNXJlbTsgLyogMTBweCAq
+Lw0KICAgICAgICB9DQoNCiAgICAgICAgLnRpbWVsaW5lIHsNCiAgICAgICAgICAgIGN1cnNvcjog
+cG9pbnRlcjsNCiAgICAgICAgICAgIGhlaWdodDogMC4zMTI1cmVtOyAvKiA1cHggKi8NCiAgICAg
+ICAgICAgIGJhY2tncm91bmQtY29sb3I6ICM0NDQ7DQogICAgICAgICAgICBmbGV4LWdyb3c6IDE7
+DQogICAgICAgICAgICBtYXJnaW46IDAuMzEyNXJlbSAwOyAvKiBTcGFjZSBhYm92ZSBhbmQgYmVs
+b3cgdGhlIHRpbWVsaW5lICovDQogICAgICAgIH0NCg0KICAgICAgICAudGltZS1kaXNwbGF5IHsN
+CiAgICAgICAgICAgIGNvbG9yOiB3aGl0ZTsNCiAgICAgICAgICAgIG1hcmdpbi10b3A6IDAuMzEy
+NXJlbTsgLyogU3BhY2UgYWJvdmUgdGltZSBkaXNwbGF5ICovDQogICAgICAgIH0NCg0KICAgICAg
+ICAuc2V0dGluZ3MtbWVudSB7DQogICAgICAgICAgICBkaXNwbGF5OiBub25lOw0KICAgICAgICAg
+ICAgcG9zaXRpb246IGFic29sdXRlOw0KICAgICAgICAgICAgYmFja2dyb3VuZDogYmxhY2s7DQog
+ICAgICAgICAgICBib3JkZXI6IDFweCBzb2xpZCAjNTU1Ow0KICAgICAgICAgICAgei1pbmRleDog
+MzsNCiAgICAgICAgICAgIHBhZGRpbmc6IDAuNjI1cmVtOyAvKiAxMHB4ICovDQogICAgICAgICAg
+ICByaWdodDogMS4yNXJlbTsgLyogMjBweCAqLw0KICAgICAgICAgICAgdG9wOiAzLjEyNXJlbTsg
+LyogNTBweCAqLw0KICAgICAgICB9DQoNCiAgICAgICAgLnNldHRpbmdzLWJ1dHRvbjpob3ZlciAr
+IC5zZXR0aW5ncy1tZW51LA0KICAgICAgICAuc2V0dGluZ3MtbWVudTpob3ZlciB7DQogICAgICAg
+ICAgICBkaXNwbGF5OiBibG9jazsNCiAgICAgICAgfQ0KDQogICAgICAgIC5xdWFsaXR5LW9wdGlv
+biB7DQogICAgICAgICAgICBjb2xvcjogd2hpdGU7DQogICAgICAgICAgICBjdXJzb3I6IHBvaW50
+ZXI7DQogICAgICAgICAgICBtYXJnaW46IDAuMzEyNXJlbSAwOyAvKiA1cHggKi8NCiAgICAgICAg
+fQ0KDQogICAgICAgIC5xdWFsaXR5LW9wdGlvbjpob3ZlciB7DQogICAgICAgICAgICB0ZXh0LWRl
+Y29yYXRpb246IHVuZGVybGluZTsNCiAgICAgICAgfQ0KDQogICAgICAgIC50b29sdGlwIHsNCiAg
+ICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsNCiAgICAgICAgICAgIGJhY2tncm91bmQtY29s
+b3I6IHJnYmEoMCwgMCwgMCwgMC43KTsNCiAgICAgICAgICAgIGNvbG9yOiB3aGl0ZTsNCiAgICAg
+ICAgICAgIHBhZGRpbmc6IDAuMzEyNXJlbTsgLyogNXB4ICovDQogICAgICAgICAgICBib3JkZXIt
+cmFkaXVzOiAwLjMxMjVyZW07IC8qIDVweCAqLw0KICAgICAgICAgICAgZGlzcGxheTogbm9uZTsN
+CiAgICAgICAgICAgIGZvbnQtc2l6ZTogMC44NzVyZW07IC8qIDE0cHggKi8NCiAgICAgICAgICAg
+IHotaW5kZXg6IDEwOw0KICAgICAgICB9DQogICAgPC9zdHlsZT4NCjwvaGVhZD4NCjxib2R5Pg0K
+DQogICAgPGgxPlNob3J0IEZvcm0gQ29udGVudDwvaDE+DQogICAgPGgyPjEuIFRhbGtpbmcgSGVh
+ZCBFZGl0czwvaDI+DQoNCiAgICA8ZGl2IGNsYXNzPSJ2aWRlby13cmFwcGVyIj4NCiAgICAgICAg
+PGRpdiBjbGFzcz0idmlkZW8tY29udGFpbmVyIiBpZD0idmlkZW8tY29udGFpbmVyLTEiPg0KICAg
+ICAgICAgICAgPGlmcmFtZSBpZD0ieW91dHViZS12aWRlby0xIiBzcmM9Imh0dHBzOi8vd3d3Lnlv
+dXR1YmUtbm9jb29raWUuY29tL2VtYmVkL3NLTlFSZ1FUTTUwP2VuYWJsZWpzYXBpPTEmY29udHJv
+bHM9MCZtb2Rlc3RicmFuZGluZz0xJnJlbD0wJnNob3dpbmZvPTAiIHRpdGxlPSJZb3VUdWJlIHZp
+ZGVvIHBsYXllciIgZnJhbWVib3JkZXI9IjAiIGFsbG93PSJhY2NlbGVyb21ldGVyOyBhdXRvcGxh
+eTsgY2xpcGJvYXJkLXdyaXRlOyBlbmNyeXB0ZWQtbWVkaWE7IHBpY3R1cmUtaW4tcGljdHVyZTsg
+d2ViLXNoYXJlIiByZWZlcnJlcnBvbGljeT0ic3RyaWN0LW9yaWdpbi13aGVuLWNyb3NzLW9yaWdp
+biIgYWxsb3dmdWxsc2NyZWVuPjwvaWZyYW1lPg0KICAgICAgICAgICAgPGRpdiBjbGFzcz0iaWZy
+YW1lLW92ZXJsYXkiIG9uY2xpY2s9InRvZ2dsZVZpZGVvKDEpIj48L2Rpdj4NCg0KICAgICAgICAg
+ICAgPGRpdiBjbGFzcz0idmlkZW8tY29udHJvbHMiPg0KICAgICAgICAgICAgICAgIDxkaXYgY2xh
+c3M9InBsYXktcGF1c2UtYnV0dG9uIiBpZD0icGxheS1wYXVzZS1idXR0b24tMSIgb25tb3VzZW92
+ZXI9InNob3dUb29sdGlwKGV2ZW50LCAnUGxheScpIiBvbm1vdXNlb3V0PSJoaWRlVG9vbHRpcCgp
+IiBvbmNsaWNrPSJ0b2dnbGVWaWRlbygxKSI+4pa277iPPC9kaXY+DQogICAgICAgICAgICAgICAg
+PGRpdiBjbGFzcz0idGltZWxpbmUtY29udGFpbmVyIj4NCiAgICAgICAgICAgICAgICAgICAgPGlu
+cHV0IHR5cGU9InJhbmdlIiBjbGFzcz0idGltZWxpbmUiIGlkPSJ0aW1lbGluZS0xIiB2YWx1ZT0i
+MCIgbWluPSIwIiBzdGVwPSIxIiBvbmNoYW5nZT0ic2Vla1ZpZGVvKDEpIj4NCiAgICAgICAgICAg
+ICAgICAgICAgPGRpdiBjbGFzcz0idGltZS1kaXNwbGF5IiBpZD0idGltZS1kaXNwbGF5LTEiPjA6
+MDAgLyAwOjAwPC9kaXY+DQogICAgICAgICAgICAgICAgPC9kaXY+DQogICAgICAgICAgICAgICAg
+PGRpdiBjbGFzcz0ic2V0dGluZ3MtYnV0dG9uIiBvbmNsaWNrPSJ0b2dnbGVTZXR0aW5ncygxKSIg
+b25tb3VzZW92ZXI9InNob3dUb29sdGlwKGV2ZW50LCAnU2V0dGluZ3MnKSIgb25tb3VzZW91dD0i
+aGlkZVRvb2x0aXAoKSI+4pqZ77iPPC9kaXY+DQogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0i
+ZnVsbHNjcmVlbi1idXR0b24iIG9uY2xpY2s9InRvZ2dsZUZ1bGxzY3JlZW4oMSkiIG9ubW91c2Vv
+dmVyPSJzaG93VG9vbHRpcChldmVudCwgJ0Z1bGxzY3JlZW4nKSIgb25tb3VzZW91dD0iaGlkZVRv
+b2x0aXAoKSI+WyBdPC9kaXY+DQogICAgICAgICAgICA8L2Rpdj4NCiAgICAgICAgICAgIDxkaXYg
+Y2xhc3M9InNldHRpbmdzLW1lbnUiIGlkPSJzZXR0aW5ncy1tZW51LTEiPg0KICAgICAgICAgICAg
+ICAgIDxkaXYgY2xhc3M9InF1YWxpdHktb3B0aW9uIiBvbmNsaWNrPSJjaGFuZ2VRdWFsaXR5KDEs
+ICcxMDgwcCcpIj4xMDgwcDwvZGl2Pg0KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InF1YWxp
+dHktb3B0aW9uIiBvbmNsaWNrPSJjaGFuZ2VRdWFsaXR5KDEsICc3MjBwJykiPjcyMHA8L2Rpdj4N
+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJxdWFsaXR5LW9wdGlvbiIgb25jbGljaz0iY2hh
+bmdlUXVhbGl0eSgxLCAnNDgwcCcpIj40ODBwPC9kaXY+DQogICAgICAgICAgICAgICAgPGRpdiBj
+bGFzcz0icXVhbGl0eS1vcHRpb24iIG9uY2xpY2s9ImNoYW5nZVF1YWxpdHkoMSwgJzM2MHAnKSI+
+MzYwcDwvZGl2Pg0KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InF1YWxpdHktb3B0aW9uIiBv
+bmNsaWNrPSJjaGFuZ2VRdWFsaXR5KDEsICcyNDBwJykiPjI0MHA8L2Rpdj4NCiAgICAgICAgICAg
+IDwvZGl2Pg0KICAgICAgICA8L2Rpdj4NCg0KICAgICAgICA8ZGl2IGNsYXNzPSJ2aWRlby1jb250
+YWluZXIiIGlkPSJ2aWRlby1jb250YWluZXItMiI+DQogICAgICAgICAgICA8aWZyYW1lIGlkPSJ5
+b3V0dWJlLXZpZGVvLTIiIHNyYz0iaHR0cHM6Ly93d3cueW91dHViZS5jb20vZW1iZWQvUGVaOGFi
+VzhHdEE/c2k9bnhPNXNWdi1mTnlyUEV3cyZlbmFibGVqc2FwaT0xJmNvbnRyb2xzPTAmbW9kZXN0
+YnJhbmRpbmc9MSZyZWw9MCZzaG93aW5mbz0wIiB0aXRsZT0iWW91VHViZSB2aWRlbyBwbGF5ZXIi
+IGZyYW1lYm9yZGVyPSIwIiBhbGxvdz0iYWNjZWxlcm9tZXRlcjsgYXV0b3BsYXk7IGNsaXBib2Fy
+ZC13cml0ZTsgZW5jcnlwdGVkLW1lZGlhOyBneXJvc2NvcGU7IHBpY3R1cmUtaW4tcGljdHVyZTsg
+d2ViLXNoYXJlIiByZWZlcnJlcnBvbGljeT0ic3RyaWN0LW9yaWdpbi13aGVuLWNyb3NzLW9yaWdp
+biIgYWxsb3dmdWxsc2NyZWVuPjwvaWZyYW1lPg0KICAgICAgICAgICAgPGRpdiBjbGFzcz0iaWZy
+YW1lLW92ZXJsYXkiIG9uY2xpY2s9InRvZ2dsZVZpZGVvKDIpIj48L2Rpdj4NCg0KICAgICAgICAg
+ICAgPGRpdiBjbGFzcz0idmlkZW8tY29udHJvbHMiPg0KICAgICAgICAgICAgICAgIDxkaXYgY2xh
+c3M9InBsYXktcGF1c2UtYnV0dG9uIiBpZD0icGxheS1wYXVzZS1idXR0b24tMiIgb25tb3VzZW92
+ZXI9InNob3dUb29sdGlwKGV2ZW50LCAnUGxheScpIiBvbm1vdXNlb3V0PSJoaWRlVG9vbHRpcCgp
+IiBvbmNsaWNrPSJ0b2dnbGVWaWRlbygyKSI+4pa277iPPC9kaXY+DQogICAgICAgICAgICAgICAg
+PGRpdiBjbGFzcz0idGltZWxpbmUtY29udGFpbmVyIj4NCiAgICAgICAgICAgICAgICAgICAgPGlu
+cHV0IHR5cGU9InJhbmdlIiBjbGFzcz0idGltZWxpbmUiIGlkPSJ0aW1lbGluZS0yIiB2YWx1ZT0i
+MCIgbWluPSIwIiBzdGVwPSIxIiBvbmNoYW5nZT0ic2Vla1ZpZGVvKDIpIj4NCiAgICAgICAgICAg
+ICAgICAgICAgPGRpdiBjbGFzcz0idGltZS1kaXNwbGF5IiBpZD0idGltZS1kaXNwbGF5LTIiPjA6
+MDAgLyAwOjAwPC9kaXY+DQogICAgICAgICAgICAgICAgPC9kaXY+DQogICAgICAgICAgICAgICAg
+PGRpdiBjbGFzcz0ic2V0dGluZ3MtYnV0dG9uIiBvbmNsaWNrPSJ0b2dnbGVTZXR0aW5ncygyKSIg
+b25tb3VzZW92ZXI9InNob3dUb29sdGlwKGV2ZW50LCAnU2V0dGluZ3MnKSIgb25tb3VzZW91dD0i
+aGlkZVRvb2x0aXAoKSI+4pqZ77iPPC9kaXY+DQogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0i
+ZnVsbHNjcmVlbi1idXR0b24iIG9uY2xpY2s9InRvZ2dsZUZ1bGxzY3JlZW4oMikiIG9ubW91c2Vv
+dmVyPSJzaG93VG9vbHRpcChldmVudCwgJ0Z1bGxzY3JlZW4nKSIgb25tb3VzZW91dD0iaGlkZVRv
+b2x0aXAoKSI+WyBdPC9kaXY+DQogICAgICAgICAgICA8L2Rpdj4NCiAgICAgICAgICAgIDxkaXYg
+Y2xhc3M9InNldHRpbmdzLW1lbnUiIGlkPSJzZXR0aW5ncy1tZW51LTIiPg0KICAgICAgICAgICAg
+ICAgIDxkaXYgY2xhc3M9InF1YWxpdHktb3B0aW9uIiBvbmNsaWNrPSJjaGFuZ2VRdWFsaXR5KDIs
+ICcxMDgwcCcpIj4xMDgwcDwvZGl2Pg0KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InF1YWxp
+dHktb3B0aW9uIiBvbmNsaWNrPSJjaGFuZ2VRdWFsaXR5KDIsICc3MjBwJykiPjcyMHA8L2Rpdj4N
+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJxdWFsaXR5LW9wdGlvbiIgb25jbGljaz0iY2hh
+bmdlUXVhbGl0eSgyLCAnNDgwcCcpIj40ODBwPC9kaXY+DQogICAgICAgICAgICAgICAgPGRpdiBj
+bGFzcz0icXVhbGl0eS1vcHRpb24iIG9uY2xpY2s9ImNoYW5nZVF1YWxpdHkoMiwgJzM2MHAnKSI+
+MzYwcDwvZGl2Pg0KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InF1YWxpdHktb3B0aW9uIiBv
+bmNsaWNrPSJjaGFuZ2VRdWFsaXR5KDIsICcyNDBwJykiPjI0MHA8L2Rpdj4NCiAgICAgICAgICAg
+IDwvZGl2Pg0KICAgICAgICA8L2Rpdj4NCiAgICA8L2Rpdj4NCg0KICAgIDxkaXYgY2xhc3M9InRv
+b2x0aXAiIGlkPSJ0b29sdGlwIj48L2Rpdj4NCg0KICAgIDxzY3JpcHQ+DQogICAgICAgIGxldCBw
+bGF5ZXJzID0gW107DQogICAgICAgIGxldCBjdXJyZW50VmlkZW8gPSBudWxsOw0KDQogICAgICAg
+IGZ1bmN0aW9uIG9uWW91VHViZUlmcmFtZUFQSVJlYWR5KCkgew0KICAgICAgICAgICAgcGxheWVy
+c1sxXSA9IG5ldyBZVC5QbGF5ZXIoJ3lvdXR1YmUtdmlkZW8tMScsIHsNCiAgICAgICAgICAgICAg
+ICBldmVudHM6IHsNCiAgICAgICAgICAgICAgICAgICAgJ29uUmVhZHknOiBvblBsYXllclJlYWR5
+LA0KICAgICAgICAgICAgICAgICAgICAnb25TdGF0ZUNoYW5nZSc6IG9uUGxheWVyU3RhdGVDaGFu
+Z2UNCiAgICAgICAgICAgICAgICB9DQogICAgICAgICAgICB9KTsNCiAgICAgICAgICAgIHBsYXll
+cnNbMl0gPSBuZXcgWVQuUGxheWVyKCd5b3V0dWJlLXZpZGVvLTInLCB7DQogICAgICAgICAgICAg
+ICAgZXZlbnRzOiB7DQogICAgICAgICAgICAgICAgICAgICdvblJlYWR5Jzogb25QbGF5ZXJSZWFk
+eSwNCiAgICAgICAgICAgICAgICAgICAgJ29uU3RhdGVDaGFuZ2UnOiBvblBsYXllclN0YXRlQ2hh
+bmdlDQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgfSk7DQogICAgICAgIH0NCg0KICAg
+ICAgICBmdW5jdGlvbiBvblBsYXllclJlYWR5KGV2ZW50KSB7DQogICAgICAgICAgICAvLyBQbGF5
+ZXIgaXMgcmVhZHkNCiAgICAgICAgfQ0KDQogICAgICAgIGZ1bmN0aW9uIG9uUGxheWVyU3RhdGVD
+aGFuZ2UoZXZlbnQpIHsNCiAgICAgICAgICAgIC8vIEhhbmRsZSBzdGF0ZSBjaGFuZ2UNCiAgICAg
+ICAgfQ0KDQogICAgICAgIGZ1bmN0aW9uIHRvZ2dsZVZpZGVvKHZpZGVvSWQpIHsNCiAgICAgICAg
+ICAgIGNvbnN0IHBsYXllciA9IHBsYXllcnNbdmlkZW9JZF07DQogICAgICAgICAgICBpZiAocGxh
+eWVyKSB7DQogICAgICAgICAgICAgICAgY29uc3Qgc3RhdGUgPSBwbGF5ZXIuZ2V0UGxheWVyU3Rh
+dGUoKTsNCiAgICAgICAgICAgICAgICBpZiAoc3RhdGUgPT09IFlULlBsYXllclN0YXRlLlBMQVlJ
+TkcpIHsNCiAgICAgICAgICAgICAgICAgICAgcGxheWVyLnBhdXNlVmlkZW8oKTsNCiAgICAgICAg
+ICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoYHBsYXktcGF1c2UtYnV0dG9uLSR7
+dmlkZW9JZH1gKS5pbm5lclRleHQgPSAn4pa277iPJzsNCiAgICAgICAgICAgICAgICB9IGVsc2Ug
+ew0KICAgICAgICAgICAgICAgICAgICBwbGF5ZXIucGxheVZpZGVvKCk7DQogICAgICAgICAgICAg
+ICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGBwbGF5LXBhdXNlLWJ1dHRvbi0ke3ZpZGVv
+SWR9YCkuaW5uZXJUZXh0ID0gJ+KPuO+4jyc7DQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAg
+ICAgfQ0KICAgICAgICB9DQoNCiAgICAgICAgZnVuY3Rpb24gc2Vla1ZpZGVvKHZpZGVvSWQpIHsN
+CiAgICAgICAgICAgIGNvbnN0IHBsYXllciA9IHBsYXllcnNbdmlkZW9JZF07DQogICAgICAgICAg
+ICBjb25zdCB0aW1lbGluZSA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGB0aW1lbGluZS0ke3Zp
+ZGVvSWR9YCk7DQogICAgICAgICAgICBjb25zdCBzZWVrVGltZSA9IHBsYXllci5nZXREdXJhdGlv
+bigpICogKHRpbWVsaW5lLnZhbHVlIC8gMTAwKTsNCiAgICAgICAgICAgIHBsYXllci5zZWVrVG8o
+c2Vla1RpbWUsIHRydWUpOw0KICAgICAgICB9DQoNCiAgICAgICAgZnVuY3Rpb24gdG9nZ2xlU2V0
+dGluZ3ModmlkZW9JZCkgew0KICAgICAgICAgICAgY29uc3Qgc2V0dGluZ3NNZW51ID0gZG9jdW1l
+bnQuZ2V0RWxlbWVudEJ5SWQoYHNldHRpbmdzLW1lbnUtJHt2aWRlb0lkfWApOw0KICAgICAgICAg
+ICAgc2V0dGluZ3NNZW51LnN0eWxlLmRpc3BsYXkgPSBzZXR0aW5nc01lbnUuc3R5bGUuZGlzcGxh
+eSA9PT0gJ2Jsb2NrJyA/ICdub25lJyA6ICdibG9jayc7DQogICAgICAgIH0NCg0KICAgICAgICBm
+dW5jdGlvbiBjaGFuZ2VRdWFsaXR5KHZpZGVvSWQsIHF1YWxpdHkpIHsNCiAgICAgICAgICAgIGNv
+bnN0IHBsYXllciA9IHBsYXllcnNbdmlkZW9JZF07DQogICAgICAgICAgICBwbGF5ZXIuc2V0UGxh
+eWJhY2tRdWFsaXR5KHF1YWxpdHkpOw0KICAgICAgICB9DQoNCiAgICAgICAgZnVuY3Rpb24gdG9n
+Z2xlRnVsbHNjcmVlbih2aWRlb0lkKSB7DQogICAgICAgICAgICBjb25zdCB2aWRlb0NvbnRhaW5l
+ciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKGB2aWRlby1jb250YWluZXItJHt2aWRlb0lkfWAp
+Ow0KICAgICAgICAgICAgaWYgKHZpZGVvQ29udGFpbmVyLnJlcXVlc3RGdWxsc2NyZWVuKSB7DQog
+ICAgICAgICAgICAgICAgdmlkZW9Db250YWluZXIucmVxdWVzdEZ1bGxzY3JlZW4oKTsNCiAgICAg
+ICAgICAgIH0gZWxzZSBpZiAodmlkZW9Db250YWluZXIubW96UmVxdWVzdEZ1bGxTY3JlZW4pIHsN
+CiAgICAgICAgICAgICAgICB2aWRlb0NvbnRhaW5lci5tb3pSZXF1ZXN0RnVsbFNjcmVlbigpOw0K
+ICAgICAgICAgICAgfSBlbHNlIGlmICh2aWRlb0NvbnRhaW5lci53ZWJraXRSZXF1ZXN0RnVsbHNj
+cmVlbikgew0KICAgICAgICAgICAgICAgIHZpZGVvQ29udGFpbmVyLndlYmtpdFJlcXVlc3RGdWxs
+c2NyZWVuKCk7DQogICAgICAgICAgICB9IGVsc2UgaWYgKHZpZGVvQ29udGFpbmVyLm1zUmVxdWVz
+dEZ1bGxzY3JlZW4pIHsNCiAgICAgICAgICAgICAgICB2aWRlb0NvbnRhaW5lci5tc1JlcXVlc3RG
+dWxsc2NyZWVuKCk7DQogICAgICAgICAgICB9DQogICAgICAgIH0NCg0KICAgICAgICBmdW5jdGlv
+biBzaG93VG9vbHRpcChldmVudCwgbWVzc2FnZSkgew0KICAgICAgICAgICAgY29uc3QgdG9vbHRp
+cCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0b29sdGlwJyk7DQogICAgICAgICAgICB0b29s
+dGlwLmlubmVyVGV4dCA9IG1lc3NhZ2U7DQogICAgICAgICAgICB0b29sdGlwLnN0eWxlLmRpc3Bs
+YXkgPSAnYmxvY2snOw0KICAgICAgICAgICAgdG9vbHRpcC5zdHlsZS5sZWZ0ID0gYCR7ZXZlbnQu
+cGFnZVh9cHhgOw0KICAgICAgICAgICAgdG9vbHRpcC5zdHlsZS50b3AgPSBgJHtldmVudC5wYWdl
+WX1weGA7DQogICAgICAgIH0NCg0KICAgICAgICBmdW5jdGlvbiBoaWRlVG9vbHRpcCgpIHsNCiAg
+ICAgICAgICAgIGNvbnN0IHRvb2x0aXAgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndG9vbHRp
+cCcpOw0KICAgICAgICAgICAgdG9vbHRpcC5zdHlsZS5kaXNwbGF5ID0gJ25vbmUnOw0KICAgICAg
+ICB9DQogICAgPC9zY3JpcHQ+DQogICAgPHNjcmlwdCBzcmM9Imh0dHBzOi8vd3d3LnlvdXR1YmUu
+Y29tL2lmcmFtZV9hcGkiPjwvc2NyaXB0Pg0KPC9ib2R5Pg0KPC9odG1sPg0K');
+            document.getElementById('content').innerHTML = content;
         }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 1.25rem; /* 20px */
-            background: linear-gradient(to right, #e0bbf1, #6a0dad);
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-
-        h1 {
-            margin: 1.25rem 0; /* 20px */
-            font-size: 2rem; /* 32px */
-        }
-
-        h2 {
-            margin: 0.625rem 0; /* 10px */
-            font-size: 1.5rem; /* 24px */
-        }
-
-        .video-wrapper {
-            display: flex;
-            gap: 1.875rem; /* Space between video containers */
-            flex-wrap: wrap; /* Allow wrapping on smaller screens */
-        }
-
-        .video-container {
-            position: relative;
-            width: 25rem; /* Increased width */
-            height: 30rem; /* Increased height */
-            background-color: black;
-            overflow: hidden;
-            padding-bottom: 3.4375rem; /* 55px */
-        }
-
-        .video-container iframe {
-            width: 100%;
-            height: 100%;
-        }
-
-        .iframe-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0);
-            z-index: 1;
-        }
-
-        .video-controls {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 0.625rem; /* Space inside controls */
-            border-radius: 0.3125rem; /* 5px */
-        }
-
-        .play-pause-button, .settings-button, .fullscreen-button {
-            font-size: 1.8125rem; /* 29px */
-            color: white;
-            cursor: pointer;
-            transition: color 0.3s;
-            z-index: 2;
-            background: none;
-            border: none;
-            margin-right: 0.625rem; /* 10px */
-        }
-
-        .timeline-container {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            margin-left: 0.625rem; /* 10px */
-        }
-
-        .timeline {
-            cursor: pointer;
-            height: 0.3125rem; /* 5px */
-            background-color: #444;
-            flex-grow: 1;
-            margin: 0.3125rem 0; /* Space above and below the timeline */
-        }
-
-        .time-display {
-            color: white;
-            margin-top: 0.3125rem; /* Space above time display */
-        }
-
-        .settings-menu {
-            display: none;
-            position: absolute;
-            background: black;
-            border: 1px solid #555;
-            z-index: 3;
-            padding: 0.625rem; /* 10px */
-            right: 1.25rem; /* 20px */
-            top: 3.125rem; /* 50px */
-        }
-
-        .settings-button:hover + .settings-menu,
-        .settings-menu:hover {
-            display: block;
-        }
-
-        .quality-option {
-            color: white;
-            cursor: pointer;
-            margin: 0.3125rem 0; /* 5px */
-        }
-
-        .quality-option:hover {
-            text-decoration: underline;
-        }
-
-        .tooltip {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 0.3125rem; /* 5px */
-            border-radius: 0.3125rem; /* 5px */
-            display: none;
-            font-size: 0.875rem; /* 14px */
-            z-index: 10;
-        }
-    </style>
-</head>
-<body>
-
-    <h1>Short Form Content</h1>
-    <h2>1. Talking Head Edits</h2>
-
-    <div class="video-wrapper">
-        <div class="video-container" id="video-container-1">
-            <iframe id="youtube-video-1" src="https://www.youtube-nocookie.com/embed/sKNQRgQTM50?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <div class="iframe-overlay" onclick="toggleVideo(1)"></div>
-
-            <div class="video-controls">
-                <div class="play-pause-button" id="play-pause-button-1" onmouseover="showTooltip(event, 'Play')" onmouseout="hideTooltip()" onclick="toggleVideo(1)">▶️</div>
-                <div class="timeline-container">
-                    <input type="range" class="timeline" id="timeline-1" value="0" min="0" step="1" onchange="seekVideo(1)">
-                    <div class="time-display" id="time-display-1">0:00 / 0:00</div>
-                </div>
-                <div class="settings-button" onclick="toggleSettings(1)" onmouseover="showTooltip(event, 'Settings')" onmouseout="hideTooltip()">⚙️</div>
-                <div class="fullscreen-button" onclick="toggleFullscreen(1)" onmouseover="showTooltip(event, 'Fullscreen')" onmouseout="hideTooltip()">[ ]</div>
-            </div>
-            <div class="settings-menu" id="settings-menu-1">
-                <div class="quality-option" onclick="changeQuality(1, '1080p')">1080p</div>
-                <div class="quality-option" onclick="changeQuality(1, '720p')">720p</div>
-                <div class="quality-option" onclick="changeQuality(1, '480p')">480p</div>
-                <div class="quality-option" onclick="changeQuality(1, '360p')">360p</div>
-                <div class="quality-option" onclick="changeQuality(1, '240p')">240p</div>
-            </div>
-        </div>
-
-        <div class="video-container" id="video-container-2">
-            <iframe id="youtube-video-2" src="https://www.youtube.com/embed/PeZ8abW8GtA?si=nxO5sVv-fNyrPEws&enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <div class="iframe-overlay" onclick="toggleVideo(2)"></div>
-
-            <div class="video-controls">
-                <div class="play-pause-button" id="play-pause-button-2" onmouseover="showTooltip(event, 'Play')" onmouseout="hideTooltip()" onclick="toggleVideo(2)">▶️</div>
-                <div class="timeline-container">
-                    <input type="range" class="timeline" id="timeline-2" value="0" min="0" step="1" onchange="seekVideo(2)">
-                    <div class="time-display" id="time-display-2">0:00 / 0:00</div>
-                </div>
-                <div class="settings-button" onclick="toggleSettings(2)" onmouseover="showTooltip(event, 'Settings')" onmouseout="hideTooltip()">⚙️</div>
-                <div class="fullscreen-button" onclick="toggleFullscreen(2)" onmouseover="showTooltip(event, 'Fullscreen')" onmouseout="hideTooltip()">[ ]</div>
-            </div>
-            <div class="settings-menu" id="settings-menu-2">
-                <div class="quality-option" onclick="changeQuality(2, '1080p')">1080p</div>
-                <div class="quality-option" onclick="changeQuality(2, '720p')">720p</div>
-                <div class="quality-option" onclick="changeQuality(2, '480p')">480p</div>
-                <div class="quality-option" onclick="changeQuality(2, '360p')">360p</div>
-                <div class="quality-option" onclick="changeQuality(2, '240p')">240p</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="tooltip" id="tooltip"></div>
-
-    <script>
-        let players = [];
-        let currentVideo = null;
-
-        function onYouTubeIframeAPIReady() {
-            players[1] = new YT.Player('youtube-video-1', {
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-            players[2] = new YT.Player('youtube-video-2', {
-                events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            // Player is ready
-        }
-
-        function onPlayerStateChange(event) {
-            // Handle state change
-        }
-
-        function toggleVideo(videoId) {
-            const player = players[videoId];
-            if (player) {
-                const state = player.getPlayerState();
-                if (state === YT.PlayerState.PLAYING) {
-                    player.pauseVideo();
-                    document.getElementById(`play-pause-button-${videoId}`).innerText = '▶️';
-                } else {
-                    player.playVideo();
-                    document.getElementById(`play-pause-button-${videoId}`).innerText = '⏸️';
-                }
-            }
-        }
-
-        function seekVideo(videoId) {
-            const player = players[videoId];
-            const timeline = document.getElementById(`timeline-${videoId}`);
-            const seekTime = player.getDuration() * (timeline.value / 100);
-            player.seekTo(seekTime, true);
-        }
-
-        function toggleSettings(videoId) {
-            const settingsMenu = document.getElementById(`settings-menu-${videoId}`);
-            settingsMenu.style.display = settingsMenu.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function changeQuality(videoId, quality) {
-            const player = players[videoId];
-            player.setPlaybackQuality(quality);
-        }
-
-        function toggleFullscreen(videoId) {
-            const videoContainer = document.getElementById(`video-container-${videoId}`);
-            if (videoContainer.requestFullscreen) {
-                videoContainer.requestFullscreen();
-            } else if (videoContainer.mozRequestFullScreen) {
-                videoContainer.mozRequestFullScreen();
-            } else if (videoContainer.webkitRequestFullscreen) {
-                videoContainer.webkitRequestFullscreen();
-            } else if (videoContainer.msRequestFullscreen) {
-                videoContainer.msRequestFullscreen();
-            }
-        }
-
-        function showTooltip(event, message) {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.innerText = message;
-            tooltip.style.display = 'block';
-            tooltip.style.left = `${event.pageX}px`;
-            tooltip.style.top = `${event.pageY}px`;
-        }
-
-        function hideTooltip() {
-            const tooltip = document.getElementById('tooltip');
-            tooltip.style.display = 'none';
-        }
-    </script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-</body>
-</html>`);
+        // Load content when the DOM is ready
+        document.addEventListener('DOMContentLoaded', loadContent);
     </script>
 </head>
 <body>
-    
+    <div id='content'>Loading content...</div>
 </body>
 </html>
