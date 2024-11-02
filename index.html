@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <script>
+        // Prevent right-click context menu
+        document.addEventListener('contextmenu', function(event) { 
+            event.preventDefault(); 
+        });
+
+        // Prevent opening developer tools with Ctrl+Shift+I (F12)
+        document.addEventListener('keydown', function(event) { 
+            if (event.ctrlKey && (event.key === 'i' || event.keyCode === 73) || 
+                (event.shiftKey && event.keyCode === 73) || 
+                (event.keyCode === 123)) { 
+                event.preventDefault(); 
+            }
+        });
+
+        // Prevent F12 key
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 123) { // F12 key
+                event.preventDefault();
+            }
+        });
+
+        // Disable certain shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.keyCode === 85) { // Ctrl+U (View Source)
+                event.preventDefault();
+            }
+        });
+
+        // Detect and warn if the console is opened
+        let devtoolsOpen = false;
+        const element = new Image();
+        Object.defineProperty(element, 'id', {
+            get: function() {
+                devtoolsOpen = true;
+                alert('Please do not use developer tools!');
+            }
+        });
+
+        setInterval(function() {
+            devtoolsOpen = false;
+            console.log(element);
+        }, 1000);
+
+  fetch('encoded_content.txt')
+      .then(response => response.text())
+      .then(encodedContent => {
+          const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
+          document.write(decodedCode);
+      });
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
