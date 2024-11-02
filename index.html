@@ -46,25 +46,291 @@
             devtoolsOpen = false;
             console.log(element);
         }, 1000);
-
-        // Fetch encoded content using AJAX
-        async function fetchAndDecode() {
-            try {
-                const response = await fetch('https://raw.githubusercontent.com/Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const encodedContent = await response.text();
-                const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
-                document.body.innerHTML = decodedCode;  // Display the decoded content
-            } catch (error) {
-                console.error('Error fetching encoded content:', error);
-            }
-        }
-
-        // Call the function to fetch and decode
-        fetchAndDecode();
     </script>
 </head>
 <body>
-    <h1>Content will be loaded here...</h1>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaam Editing Portfolio</title>
+    <style>
+        html {
+            font-size: 16px; /* Set base font size */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 1.25rem; /* 20px */
+            background: linear-gradient(to right, #e0bbf1, #6a0dad);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin: 1.25rem 0; /* 20px */
+            font-size: 2rem; /* 32px */
+        }
+
+        h2 {
+            margin: 0.625rem 0; /* 10px */
+            font-size: 1.5rem; /* 24px */
+        }
+
+        .video-wrapper {
+            display: flex;
+            gap: 1.875rem; /* Space between video containers */
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .video-container {
+            position: relative;
+            width: 25rem; /* Increased width */
+            height: 30rem; /* Increased height */
+            background-color: black;
+            overflow: hidden;
+            padding-bottom: 3.4375rem; /* 55px */
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        .iframe-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            z-index: 1;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 0.625rem; /* Space inside controls */
+            border-radius: 0.3125rem; /* 5px */
+        }
+
+        .play-pause-button, .settings-button, .fullscreen-button {
+            font-size: 1.8125rem; /* 29px */
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 2;
+            background: none;
+            border: none;
+            margin-right: 0.625rem; /* 10px */
+        }
+
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            margin-left: 0.625rem; /* 10px */
+        }
+
+        .timeline {
+            cursor: pointer;
+            height: 0.3125rem; /* 5px */
+            background-color: #444;
+            flex-grow: 1;
+            margin: 0.3125rem 0; /* Space above and below the timeline */
+        }
+
+        .time-display {
+            color: white;
+            margin-top: 0.3125rem; /* Space above time display */
+        }
+
+        .settings-menu {
+            display: none;
+            position: absolute;
+            background: black;
+            border: 1px solid #555;
+            z-index: 3;
+            padding: 0.625rem; /* 10px */
+            right: 1.25rem; /* 20px */
+            top: 3.125rem; /* 50px */
+        }
+
+        .settings-button:hover + .settings-menu,
+        .settings-menu:hover {
+            display: block;
+        }
+
+        .quality-option {
+            color: white;
+            cursor: pointer;
+            margin: 0.3125rem 0; /* 5px */
+        }
+
+        .quality-option:hover {
+            text-decoration: underline;
+        }
+
+        .tooltip {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.3125rem; /* 5px */
+            border-radius: 0.3125rem; /* 5px */
+            display: none;
+            font-size: 0.875rem; /* 14px */
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Short Form Content</h1>
+    <h2>1. Talking Head Edits</h2>
+
+    <div class="video-wrapper">
+        <div class="video-container" id="video-container-1">
+            <iframe id="youtube-video-1" src="https://www.youtube-nocookie.com/embed/sKNQRgQTM50?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="iframe-overlay" onclick="toggleVideo(1)"></div>
+
+            <div class="video-controls">
+                <div class="play-pause-button" id="play-pause-button-1" onmouseover="showTooltip(event, 'Play')" onmouseout="hideTooltip()" onclick="toggleVideo(1)">▶️</div>
+                <div class="timeline-container">
+                    <input type="range" class="timeline" id="timeline-1" value="0" min="0" step="1" onchange="seekVideo(1)">
+                    <div class="time-display" id="time-display-1">0:00 / 0:00</div>
+                </div>
+                <div class="settings-button" onclick="toggleSettings(1)" onmouseover="showTooltip(event, 'Settings')" onmouseout="hideTooltip()">⚙️</div>
+                <div class="fullscreen-button" onclick="toggleFullscreen(1)" onmouseover="showTooltip(event, 'Fullscreen')" onmouseout="hideTooltip()">[ ]</div>
+            </div>
+            <div class="settings-menu" id="settings-menu-1">
+                <div class="quality-option" onclick="changeQuality(1, '1080p')">1080p</div>
+                <div class="quality-option" onclick="changeQuality(1, '720p')">720p</div>
+                <div class="quality-option" onclick="changeQuality(1, '480p')">480p</div>
+                <div class="quality-option" onclick="changeQuality(1, '360p')">360p</div>
+                <div class="quality-option" onclick="changeQuality(1, '240p')">240p</div>
+            </div>
+        </div>
+
+        <div class="video-container" id="video-container-2">
+            <iframe id="youtube-video-2" src="https://www.youtube.com/embed/PeZ8abW8GtA?si=nxO5sVv-fNyrPEws&enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="iframe-overlay" onclick="toggleVideo(2)"></div>
+
+            <div class="video-controls">
+                <div class="play-pause-button" id="play-pause-button-2" onmouseover="showTooltip(event, 'Play')" onmouseout="hideTooltip()" onclick="toggleVideo(2)">▶️</div>
+                <div class="timeline-container">
+                    <input type="range" class="timeline" id="timeline-2" value="0" min="0" step="1" onchange="seekVideo(2)">
+                    <div class="time-display" id="time-display-2">0:00 / 0:00</div>
+                </div>
+                <div class="settings-button" onclick="toggleSettings(2)" onmouseover="showTooltip(event, 'Settings')" onmouseout="hideTooltip()">⚙️</div>
+                <div class="fullscreen-button" onclick="toggleFullscreen(2)" onmouseover="showTooltip(event, 'Fullscreen')" onmouseout="hideTooltip()">[ ]</div>
+            </div>
+            <div class="settings-menu" id="settings-menu-2">
+                <div class="quality-option" onclick="changeQuality(2, '1080p')">1080p</div>
+                <div class="quality-option" onclick="changeQuality(2, '720p')">720p</div>
+                <div class="quality-option" onclick="changeQuality(2, '480p')">480p</div>
+                <div class="quality-option" onclick="changeQuality(2, '360p')">360p</div>
+                <div class="quality-option" onclick="changeQuality(2, '240p')">240p</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        let players = [];
+        let currentVideo = null;
+
+        function onYouTubeIframeAPIReady() {
+            players[1] = new YT.Player('youtube-video-1', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+            players[2] = new YT.Player('youtube-video-2', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player is ready
+        }
+
+        function onPlayerStateChange(event) {
+            // Handle state change
+        }
+
+        function toggleVideo(videoId) {
+            const player = players[videoId];
+            if (player) {
+                const state = player.getPlayerState();
+                if (state === YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                    document.getElementById(`play-pause-button-${videoId}`).innerText = '▶️';
+                } else {
+                    player.playVideo();
+                    document.getElementById(`play-pause-button-${videoId}`).innerText = '⏸️';
+                }
+            }
+        }
+
+        function seekVideo(videoId) {
+            const player = players[videoId];
+            const timeline = document.getElementById(`timeline-${videoId}`);
+            const seekTime = player.getDuration() * (timeline.value / 100);
+            player.seekTo(seekTime, true);
+        }
+
+        function toggleSettings(videoId) {
+            const settingsMenu = document.getElementById(`settings-menu-${videoId}`);
+            settingsMenu.style.display = settingsMenu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function changeQuality(videoId, quality) {
+            const player = players[videoId];
+            player.setPlaybackQuality(quality);
+        }
+
+        function toggleFullscreen(videoId) {
+            const videoContainer = document.getElementById(`video-container-${videoId}`);
+            if (videoContainer.requestFullscreen) {
+                videoContainer.requestFullscreen();
+            } else if (videoContainer.mozRequestFullScreen) {
+                videoContainer.mozRequestFullScreen();
+            } else if (videoContainer.webkitRequestFullscreen) {
+                videoContainer.webkitRequestFullscreen();
+            } else if (videoContainer.msRequestFullscreen) {
+                videoContainer.msRequestFullscreen();
+            }
+        }
+
+        function showTooltip(event, message) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerText = message;
+            tooltip.style.display = 'block';
+            tooltip.style.left = `${event.pageX}px`;
+            tooltip.style.top = `${event.pageY}px`;
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'none';
+        }
+    </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
 </body>
 </html>
