@@ -48,7 +48,8 @@
         }, 1000);
 
         // Decode content from the GitHub secret
-        const decodedCode = decodeURIComponent(escape(atob()));
+        const encodedContent = '';  // Fetch from GitHub secret
+        const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
         document.write(decodedCode);
     </script>
 </head>
