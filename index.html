@@ -3,7 +3,7 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Decoded HTML</title>
+    
 </head>
 <body>
     <script>
@@ -50,22 +50,9 @@
             console.log(element);
         }, 1000);
 
-        // Fetch the encoded content from the private repo
-        async function fetchEncodedContent() {
-        const token = process.env.PUBLIC_REPO_TOKEN; // Make sure this is set correctly in your workflow
-
-            const response = await fetch('https://raw.githubusercontent.com/Kaam-Editing/Kaam-Editing-portfolio-design/main/private_repo/encoded_content.txt', {
-                headers: {
-                    'Authorization':  // Use the token retrieved from your environment variable
-                }
-            });
-            if (!response.ok) throw new Error('Network response was not ok');
-            const encodedCode = await response.text();
-            const decodedCode = atob(encodedCode); // Decode from Base64
-            document.write(decodedCode);
-        }
-
-        fetchEncodedContent().catch(error => console.error('Error fetching the encoded content:', error));
+        const encodedCode = '';
+        const decodedCode = decodeURIComponent(escape(atob(encodedCode)));
+        document.write(decodedCode);
     </script>
 </body>
 </html>
