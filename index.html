@@ -3,9 +3,6 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Decoded HTML</title>
-</head>
-<body>
     <script>
         // Prevent right-click context menu
         document.addEventListener('contextmenu', function(event) { 
@@ -50,21 +47,19 @@
             console.log(element);
         }, 1000);
 
-        // Fetch the encoded content from the private repo
-        async function fetchEncodedContent() {
-            const response = await fetch('https://raw.githubusercontent.com/Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt', {
-                headers: {
-                      'Authorization': 'Bearer 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'
-                          }
-
+        // Fetch encoded content using AJAX
+        fetch('../Kaam-Editing/Kaam-Editing-portfolio-design/main/encoded_content.txt')
+            .then(response => response.text())
+            .then(encodedContent => {
+                const decodedCode = decodeURIComponent(escape(atob(encodedContent)));
+                document.write(decodedCode);
+            })
+            .catch(error => {
+                console.error('Error fetching encoded content:', error);
             });
-            if (!response.ok) throw new Error('Network response was not ok');
-            const encodedCode = await response.text();
-            const decodedCode = atob(encodedCode); // Decode from Base64
-            document.write(decodedCode);
-        }
-
-        fetchEncodedContent().catch(error => console.error('Error fetching the encoded content:', error));
     </script>
+</head>
+<body>
+    
 </body>
 </html>
