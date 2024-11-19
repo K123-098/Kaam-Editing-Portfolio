@@ -11,13 +11,6 @@
         styleElement.innerHTML = decodedCSS;  // Insert the decoded CSS into the <style> tag
         document.head.appendChild(styleElement);  // Append the <style> tag to the <head>
         
-        // Decoding the encoded image and setting it as the source for an <img> tag
-        const encodedImage = '';
-        const imgElement = document.createElement('img');
-        imgElement.src = 'data:image/jpeg;base64,' + encodedImage;  // Notice the JPEG MIME type here
-        imgElement.alt = 'Embedded Image';
-        document.body.appendChild(imgElement);  // Append the image to the body
-
     </script>
 </head>
 <body>
